@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=3 uid="uid://ca1o6x8cpmc00"]
+
+[ext_resource type="Texture2D" uid="uid://dasn2b65ikjg" path="res://assets/imported/resources/graphics/enemies/scout.png" id="1_ae8lb"]
+[ext_resource type="Script" path="res://scenes/enemies/scout.gd" id="1_umv3d"]
+[ext_resource type="Shader" path="res://scenes/enemies/scout.gdshader" id="2_xh52c"]
+[ext_resource type="AudioStream" uid="uid://drk5sr4pea06q" path="res://assets/imported/resources/audio/laser.wav" id="3_fmpl4"]
+[ext_resource type="AudioStream" uid="uid://nxo7q5bpgkld" path="res://assets/imported/resources/audio/solid_impact.ogg" id="5_ofw76"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j5o2g"]
+radius = 1083.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v1kup"]
+radius = 49.2443
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tiicw"]
+shader = ExtResource("2_xh52c")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/progress = 0.0
+
+[node name="Scout" type="CharacterBody2D" groups=["Entity", "Scouts"]]
+collision_layer = 2
+collision_mask = 15
+script = ExtResource("1_umv3d")
+
+[node name="DetectionRange_Area2D" type="Area2D" parent="."]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRange_Area2D"]
+position = Vector2(109, -28)
+shape = SubResource("CircleShape2D_j5o2g")
+debug_color = Color(0.898857, 0.295582, 0.262003, 0.419608)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_v1kup")
+
+[node name="Scout_Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_tiicw")
+position = Vector2(41, 27)
+rotation = 1.5708
+texture = ExtResource("1_ae8lb")
+
+[node name="SFX" type="Node2D" parent="."]
+
+[node name="Shoot_SFX" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("3_fmpl4")
+volume_db = -10.0
+pitch_scale = 0.4
+bus = &"SFX"
+area_mask = 3
+
+[node name="Solid_Impact_SFX" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("5_ofw76")
+bus = &"SFX"
+
+[node name="LaserSpawnPositions" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="LaserSpawnPositions"]
+position = Vector2(121, -26)
+
+[node name="Marker2D2" type="Marker2D" parent="LaserSpawnPositions"]
+position = Vector2(130, 10)
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="Shoot_Timer" type="Timer" parent="Timers"]
+
+[node name="IFrames_Timer" type="Timer" parent="Timers"]
+wait_time = 0.3
+
+[connection signal="body_entered" from="DetectionRange_Area2D" to="." method="_on_detection_range_area_2d_body_entered"]
+[connection signal="body_exited" from="DetectionRange_Area2D" to="." method="_on_detection_range_area_2d_body_exited"]
+[connection signal="timeout" from="Timers/Shoot_Timer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="Timers/IFrames_Timer" to="." method="_on_i_frames_timer_timeout"]

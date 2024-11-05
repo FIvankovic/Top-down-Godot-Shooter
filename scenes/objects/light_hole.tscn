@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cn7y0m6t2qmfv"]
+
+[ext_resource type="Texture2D" uid="uid://b2efh31fgrue3" path="res://assets/imported/resources/graphics/lights/overlays/hole.png" id="1_xoqgf"]
+[ext_resource type="Texture2D" uid="uid://cm4jc0f47gh80" path="res://assets/imported/resources/graphics/lights/textures/circle.png" id="2_t0ior"]
+
+[node name="LightHole" type="Sprite2D"]
+modulate = Color(0.752838, 0.479746, 0.355684, 0.0588235)
+texture = ExtResource("1_xoqgf")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.74902, 0.47451, 0.352941, 1)
+energy = 0.2
+texture = ExtResource("2_t0ior")
+texture_scale = 0.8

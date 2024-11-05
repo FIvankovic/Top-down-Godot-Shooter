@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://bbvgnau4nud26"]
+
+[ext_resource type="Texture2D" uid="uid://b26mgxtsyvbrj" path="res://assets/imported/resources/graphics/items/orb2.png" id="1_twtgo"]
+[ext_resource type="Script" path="res://scenes/items/item.gd" id="1_xn2lx"]
+[ext_resource type="Texture2D" uid="uid://cm4jc0f47gh80" path="res://assets/imported/resources/graphics/lights/textures/circle.png" id="1_y8jcf"]
+[ext_resource type="AudioStream" uid="uid://bofri5p6x5sok" path="res://assets/imported/resources/audio/item.mp3" id="4_tjcde"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h3ysk"]
+radius = 60.0
+
+[node name="Item" type="Area2D"]
+collision_layer = 16
+script = ExtResource("1_xn2lx")
+
+[node name="ItemGlow_PointLight2D" type="PointLight2D" parent="."]
+energy = 4.0
+texture = ExtResource("1_y8jcf")
+texture_scale = 0.4
+
+[node name="ItemSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_twtgo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_h3ysk")
+
+[node name="ItemPickup_SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_tjcde")
+bus = &"SFX"
+area_mask = 17
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

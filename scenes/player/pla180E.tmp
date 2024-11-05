@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://bl03l2x5edbqm"]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_81h8h"]
+[ext_resource type="Texture2D" uid="uid://debs6835vii1d" path="res://assets/imported/resources/graphics/player/player.png" id="1_u7yav"]
+[ext_resource type="Texture2D" uid="uid://bo72f6aw8okgo" path="res://assets/imported/resources/graphics/explosions/gun.png" id="3_phgqn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wphrd"]
+radius = 60.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vyseg"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 31
+script = ExtResource("1_81h8h")
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+position = Vector2(40, 0)
+rotation = 1.5708
+texture = ExtResource("1_u7yav")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wphrd")
+
+[node name="GunShotVFX" type="GPUParticles2D" parent="."]
+position = Vector2(130, 20)
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_vyseg")
+texture = ExtResource("3_phgqn")
+one_shot = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="GrenadeTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="LaserMarkers" type="Node2D" parent="."]
+position = Vector2(-10, 0)
+
+[node name="LaserMarker01" type="Marker2D" parent="LaserMarkers"]
+position = Vector2(141, 10)
+
+[node name="LaserMarker02" type="Marker2D" parent="LaserMarkers"]
+position = Vector2(141, 19)
+
+[node name="LaserMarker03" type="Marker2D" parent="LaserMarkers"]
+position = Vector2(141, 28)
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="GrenadeTimer" to="." method="_on_grenade_timer_timeout"]

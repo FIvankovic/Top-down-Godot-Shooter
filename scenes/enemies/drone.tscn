@@ -1,0 +1,165 @@
+[gd_scene load_steps=12 format=3 uid="uid://repsy8qx0off"]
+
+[ext_resource type="Shader" path="res://scenes/enemies/drone.gdshader" id="1_mqjsy"]
+[ext_resource type="Script" path="res://scenes/enemies/drone.gd" id="1_psn5w"]
+[ext_resource type="Texture2D" uid="uid://dhxplkcvtsxxp" path="res://assets/imported/resources/graphics/enemies/drone.png" id="2_puyts"]
+[ext_resource type="AudioStream" uid="uid://nxo7q5bpgkld" path="res://assets/imported/resources/audio/solid_impact.ogg" id="3_ovc0c"]
+[ext_resource type="Texture2D" uid="uid://cd5d7frsnocj5" path="res://assets/imported/resources/graphics/explosions/explosion_3.png" id="4_tyjv3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hshbk"]
+shader = ExtResource("1_mqjsy")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/progress = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rit3u"]
+radius = 76.0592
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2il5x"]
+radius = 1242.15
+
+[sub_resource type="Animation" id="Animation_p8t47"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Explosion:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [22]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Explosion:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Drone_Sprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_qmmxx"]
+resource_name = "explosion"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Explosion:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.433333, 0.466667, 0.5, 0.533333, 0.566667, 0.6, 0.633333, 0.666667, 0.7, 0.733333, 0.766667, 0.8, 0.833333, 0.866667, 0.9, 0.933333, 0.966667, 1, 1.03333, 1.06667, 1.1, 1.13333, 1.16667, 1.2, 1.23333, 1.26667, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 62]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Explosion:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Drone_Sprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"stop_movement"
+}, {
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xo8vw"]
+_data = {
+"RESET": SubResource("Animation_p8t47"),
+"explosion": SubResource("Animation_qmmxx")
+}
+
+[node name="Drone" type="CharacterBody2D" groups=["Entity"]]
+collision_layer = 2
+collision_mask = 15
+script = ExtResource("1_psn5w")
+
+[node name="Drone_Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_hshbk")
+rotation = 1.5708
+texture = ExtResource("2_puyts")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rit3u")
+
+[node name="Detection_Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection_Area2D"]
+shape = SubResource("CircleShape2D_2il5x")
+
+[node name="SFX" type="Node2D" parent="."]
+
+[node name="Solid_Impact_SFX" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("3_ovc0c")
+bus = &"SFX"
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="IFrames_Timer" type="Timer" parent="Timers"]
+wait_time = 0.3
+
+[node name="Explosion" type="Sprite2D" parent="."]
+position = Vector2(-6.99998, 9.99998)
+scale = Vector2(1.78906, 1.78906)
+texture = ExtResource("4_tyjv3")
+hframes = 8
+vframes = 8
+frame = 22
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xo8vw")
+}
+
+[connection signal="body_entered" from="Detection_Area2D" to="." method="_on_detection_area_2d_body_entered"]
+[connection signal="timeout" from="Timers/IFrames_Timer" to="." method="_on_i_frames_timer_timeout"]

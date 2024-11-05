@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://repsy8qx0off"]
+
+[ext_resource type="Script" path="res://scenes/enemies/drone.gd" id="1_psn5w"]
+[ext_resource type="Texture2D" uid="uid://dhxplkcvtsxxp" path="res://assets/imported/resources/graphics/enemies/drone.png" id="2_puyts"]
+[ext_resource type="AudioStream" uid="uid://nxo7q5bpgkld" path="res://assets/imported/resources/audio/solid_impact.ogg" id="3_ovc0c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rit3u"]
+radius = 76.0592
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2il5x"]
+radius = 1577.35
+
+[node name="Drone" type="CharacterBody2D" groups=["Entity"]]
+collision_layer = 2
+collision_mask = 15
+script = ExtResource("1_psn5w")
+
+[node name="Drone_Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("2_puyts")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rit3u")
+
+[node name="Detection_Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection_Area2D"]
+shape = SubResource("CircleShape2D_2il5x")
+
+[node name="SFX" type="Node2D" parent="."]
+
+[node name="Solid_Impact_SFX" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("3_ovc0c")
+bus = &"SFX"
+
+[connection signal="body_entered" from="Detection_Area2D" to="." method="_on_detection_area_2d_body_entered"]

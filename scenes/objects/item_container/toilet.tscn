@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://b18iwgia2hkxb"]
+
+[ext_resource type="PackedScene" uid="uid://c121f2x51ohax" path="res://scenes/objects/item_container/item_container.tscn" id="1_hp5le"]
+[ext_resource type="Script" path="res://scenes/objects/item_container/toilet.gd" id="2_2dyd0"]
+[ext_resource type="Texture2D" uid="uid://ut3c3os1da4a" path="res://assets/imported/resources/graphics/objects/toilet.png" id="2_y4518"]
+[ext_resource type="Texture2D" uid="uid://dndanif50qqb" path="res://assets/imported/resources/graphics/objects/lid.png" id="3_vm5es"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j6u6x"]
+radius = 94.2603
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gem1a"]
+radius = 207.022
+
+[node name="Toilet" instance=ExtResource("1_hp5le")]
+script = ExtResource("2_2dyd0")
+
+[node name="BaseSprite" parent="." index="0"]
+texture = ExtResource("2_y4518")
+
+[node name="LidSprite" parent="." index="1"]
+position = Vector2(0, 25)
+texture = ExtResource("3_vm5es")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+shape = SubResource("CircleShape2D_j6u6x")
+
+[node name="Marker2D5" type="Marker2D" parent="SpawnPositions" index="0"]
+position = Vector2(0, 35)
+
+[node name="AudioStreamPlayer2D" parent="." index="4"]
+bus = &"SFX"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interact_Area2D" index="0"]
+shape = SubResource("CircleShape2D_gem1a")
+debug_color = Color(0, 0.635348, 0.418272, 0.42)
+
+[connection signal="body_entered" from="Interact_Area2D" to="." method="_on_interact_area_2d_body_entered"]
+[connection signal="body_exited" from="Interact_Area2D" to="." method="_on_interact_area_2d_body_exited"]

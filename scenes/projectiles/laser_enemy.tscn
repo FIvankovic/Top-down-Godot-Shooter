@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://wpsp24sctqfs"]
+
+[ext_resource type="Script" path="res://scenes/projectiles/laser.gd" id="1_fd7q1"]
+[ext_resource type="Texture2D" uid="uid://bufyje55ymc5q" path="res://assets/imported/resources/graphics/projectiles/red.png" id="2_ei1wn"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ax3ox"]
+height = 150.0
+
+[node name="Laser" type="Area2D"]
+collision_layer = 8
+collision_mask = 5
+script = ExtResource("1_fd7q1")
+
+[node name="LaserSprite" type="Sprite2D" parent="."]
+position = Vector2(0, 8)
+texture = ExtResource("2_ei1wn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_ax3ox")
+
+[node name="LaserLifespan" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="LaserLifespan" to="." method="_on_laser_lifespan_timeout"]

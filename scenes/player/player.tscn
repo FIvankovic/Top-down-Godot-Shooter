@@ -1,0 +1,120 @@
+[gd_scene load_steps=14 format=3 uid="uid://bl03l2x5edbqm"]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_81h8h"]
+[ext_resource type="Shader" path="res://scenes/player/player.gdshader" id="2_cuq8n"]
+[ext_resource type="Texture2D" uid="uid://dlo1mgqolijb4" path="res://assets/imported/resources/graphics/decals/white.png" id="3_27x3u"]
+[ext_resource type="Texture2D" uid="uid://d3b3cgby2yefg" path="res://assets/imported/resources/graphics/player/Player_Sniper.png" id="3_oy3lb"]
+[ext_resource type="AudioStream" uid="uid://drk5sr4pea06q" path="res://assets/imported/resources/audio/laser.wav" id="4_45ffd"]
+[ext_resource type="AudioStream" uid="uid://we531fim4h51" path="res://assets/imported/resources/audio/container_hit.mp3" id="5_mm22c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wphrd"]
+radius = 55.0818
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5s3fb"]
+shader = ExtResource("2_cuq8n")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/progress = 0.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xjssu"]
+polygon = PackedVector2Array(-195, 23, -191, 28, -188, 35, -176, 40, -169, 48, -160, 45, -148, 46, -143, 41, -144, 33, -139, 30, -134, 30, -120, 15, -105, 14, -100, 13, -97, 17, -65, 17, -58, 9, -48, 9, -48, 7, -44, 7, -44, 11, -39, 13, -36, 11, -35, 8, -28, 8, -26, 12, -22, 12, -20, 8, -14, 8, -12, 11, -10, 10, -12, 19, -12, 22, -4, 21, 5, 11, 11, 10, 12, 6, 35, 7, 38, 3, 36, -15, 12, -16, 12, -19, 3, -19, -5, -29, -14, -29, -14, -25, -10, -19, -15, -16, -19, -16, -22, -19, -27, -19, -29, -16, -35, -16, -39, -20, -43, -18, -45, -16, -49, -17, -56, -18, -57, -24, -63, -32, -69, -32, -70, -40, -66, -43, -67, -48, -72, -52, -79, -52, -85, -48, -88, -44, -94, -48, -100, -53, -105, -53, -105, -62, -111, -67, -120, -63, -127, -69, -132, -73, -137, -72, -138, -84, -147, -87, -159, -83, -187, -72, -194, -68, -200, -54, -200, -50, -195, -50, -199, -42, -204, -38, -206, -32, -212, -27, -212, -15, -207, -12, -207, -7, -204, -1, -208, 2, -206, 11, -200, 22)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_8q8ej"]
+closed = false
+polygon = PackedVector2Array(-180, -47, -179.506, -48.112, -176, -56, -171, -62, -164, -66, -154, -66, -153, -65, -151, -67, -151, -71, -142, -76, -136, -76, -135, -74, -127, -79, -114, -79, -112, -77, -106, -81, -99, -81, -94, -76, -90, -71, -88, -67, -85, -65, -79, -60, -80, -57, -75, -48, -70, -49, -60, -43, -48, -30, -44, -30, -39, -31, -35, -31, -27, -24, -19, -24, -15, -22, -13, -21, -12, -18, -1, -18, 1, -16, 0, -14, -2, -11, 0, -11, 4, -14, 7, -12, 10, -7, 10, 5, 8, 9, 7, 12, 4, 13, 1, 13, 0, 11, -4, 11, -3, 13, -2, 14, -2, 18, -12, 18, -14, 15, -18, 18, -24, 24, -28, 24, -28, 31, -30, 33, -54, 33, -62, 33, -65, 29, -65, 25, -59, 21, -79, 22, -82, 20, -87, 25, -91, 26, -99, 27, -110, 34, -119, 38, -126, 40, -130, 40, -132, 41, -136, 42, -146, 41, -156, 37, -161, 31, -161, 25, -166, 20, -168, 13, -174, 9, -177, 1, -175, -1, -175, -4, -179, -5, -181, -8, -183, -13, -185, -20, -183, -29, -184, -40, -180, -47)
+
+[sub_resource type="Gradient" id="Gradient_1vg08"]
+offsets = PackedFloat32Array(0, 0.836066)
+colors = PackedColorArray(0, 0.886275, 0.886275, 0.505882, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_j8l0k"]
+gradient = SubResource("Gradient_1vg08")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3sjv0"]
+particle_flag_disable_z = true
+spread = 10.0
+initial_velocity_min = 1200.0
+initial_velocity_max = 1500.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = -2.23517e-06
+radial_accel_min = -2.23517e-06
+radial_accel_max = 10.0
+tangential_accel_min = 43.01
+tangential_accel_max = 43.01
+scale_min = 0.5
+color = Color(0, 0.886275, 0.886275, 0.196078)
+color_ramp = SubResource("GradientTexture1D_j8l0k")
+
+[node name="Player" type="CharacterBody2D" groups=["Entity"]]
+collision_mask = 31
+script = ExtResource("1_81h8h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wphrd")
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_5s3fb")
+position = Vector2(40, 0)
+rotation = 1.5708
+texture = ExtResource("3_oy3lb")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(127, 19)
+occluder = SubResource("OccluderPolygon2D_xjssu")
+
+[node name="Player_Shadow" type="LightOccluder2D" parent="."]
+visible = false
+position = Vector2(127, 19)
+occluder = SubResource("OccluderPolygon2D_8q8ej")
+
+[node name="Gunshot_VFX" type="GPUParticles2D" parent="."]
+position = Vector2(143, 15)
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_3sjv0")
+texture = ExtResource("3_27x3u")
+lifetime = 0.2
+one_shot = true
+
+[node name="LaserMarkers" type="Node2D" parent="."]
+position = Vector2(141, 14)
+
+[node name="LaserMarker01" type="Marker2D" parent="LaserMarkers"]
+position = Vector2(8, -5)
+
+[node name="LaserMarker02" type="Marker2D" parent="LaserMarkers"]
+position = Vector2(8, 1)
+
+[node name="LaserMarker03" type="Marker2D" parent="LaserMarkers"]
+position = Vector2(8, 6)
+
+[node name="SFX" type="Node2D" parent="."]
+
+[node name="ShootBullet_SFX" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("4_45ffd")
+volume_db = -20.0
+attenuation = 6.49801
+bus = &"SFX"
+
+[node name="PlayerHit_SFX" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("5_mm22c")
+pitch_scale = 0.7
+bus = &"SFX"
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="ShootTimer" type="Timer" parent="Timers"]
+wait_time = 0.5
+one_shot = true
+
+[node name="GrenadeTimer" type="Timer" parent="Timers"]
+wait_time = 2.0
+one_shot = true
+
+[node name="IFrames_Timer" type="Timer" parent="Timers"]
+wait_time = 1.5
+one_shot = true
+
+[connection signal="timeout" from="Timers/ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="Timers/GrenadeTimer" to="." method="_on_grenade_timer_timeout"]
+[connection signal="timeout" from="Timers/IFrames_Timer" to="." method="_on_i_frames_timer_timeout"]

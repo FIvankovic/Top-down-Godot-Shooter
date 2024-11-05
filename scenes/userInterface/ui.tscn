@@ -1,0 +1,113 @@
+[gd_scene load_steps=8 format=3 uid="uid://c5fncu4wdm0if"]
+
+[ext_resource type="Script" path="res://scenes/userInterface/ui.gd" id="1_ovutu"]
+[ext_resource type="Theme" uid="uid://bfk6fl4rn4w5a" path="res://scenes/userInterface/main_font.tres" id="1_sq7ng"]
+[ext_resource type="Texture2D" uid="uid://8nh2lftt0j6d" path="res://assets/imported/resources/graphics/ui/bullet.png" id="1_wj3qg"]
+[ext_resource type="Texture2D" uid="uid://kiqbb4fdxp8y" path="res://assets/imported/resources/graphics/ui/grenade.png" id="3_h0mqq"]
+[ext_resource type="Texture2D" uid="uid://bopr83mcayhrq" path="res://assets/imported/resources/graphics/ui/progress_bar/bg.png" id="4_i426b"]
+[ext_resource type="Texture2D" uid="uid://b1e8d0rbysah5" path="res://assets/imported/resources/graphics/ui/progress_bar/over.png" id="5_t4ad1"]
+[ext_resource type="Texture2D" uid="uid://dt3xkdoxjl8f1" path="res://assets/imported/resources/graphics/ui/progress_bar/progress.png" id="6_j0tsi"]
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_ovutu")
+
+[node name="BulletCounter" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.01
+anchor_top = 0.95
+anchor_right = 0.01
+anchor_bottom = 1.0
+offset_top = -50.0
+offset_right = 40.0
+offset_bottom = -10.0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BulletCounter"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -65.0
+offset_right = 38.0
+grow_vertical = 0
+tooltip_text = "Bullet Count"
+alignment = 1
+
+[node name="Label" type="Label" parent="BulletCounter/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_sq7ng")
+text = "20
+"
+horizontal_alignment = 1
+
+[node name="BulletTextureRect" type="TextureRect" parent="BulletCounter/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_wj3qg")
+expand_mode = 4
+
+[node name="GrenadeCounter" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.07
+anchor_top = 0.95
+anchor_right = 0.1
+anchor_bottom = 0.95
+offset_left = -25.6
+offset_top = -32.0
+offset_right = -15.6
+offset_bottom = -32.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GrenadeCounter"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_top = -8.0
+offset_right = 38.0
+offset_bottom = 67.0
+grow_vertical = 0
+tooltip_text = "Grenade Count"
+alignment = 1
+
+[node name="Label" type="Label" parent="GrenadeCounter/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_sq7ng")
+text = "5
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GrenadeTextureRect" type="TextureRect" parent="GrenadeCounter/VBoxContainer"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+tooltip_text = "Grenades"
+texture = ExtResource("3_h0mqq")
+expand_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 20
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+tooltip_text = "Player Health"
+value = 100.0
+texture_under = ExtResource("4_i426b")
+texture_over = ExtResource("5_t4ad1")
+texture_progress = ExtResource("6_j0tsi")
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_sq7ng")
+text = " 100%"
+horizontal_alignment = 1
